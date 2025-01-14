@@ -35,15 +35,16 @@ func HandleAllNspiGenericJsonUpIngestion(c *gin.Context) {
 	var organization = "IMT" // FORCE TO IMT DEVICE_TYPE
 	// var organization = jsonMessageMap["organization"]
 	var deviceType = "NSPI" // FORCE TO NSPI DEVICE_TYPE
-	// var deviceType = jsonMessageMap["deviceType"]
-	var measurement = jsonMessageMap["measurement"]
-	if measurement == nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": "error",
-			"msg":    "Invalid input, please check your data. Missing 'measurement' key in json.",
-		})
-		return
-	}
+	// var deviceType = // FORCE TO GenericJson MEASUREMENT
+	var measurement = "GenericJson" // FORCE TO GenericJson MEASUREMENT
+	// var measurement = jsonMessageMap["measurement"]
+	// if measurement == nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{
+	// 		"status": "error",
+	// 		"msg":    "Invalid input, please check your data. Missing 'measurement' key in json.",
+	// 	})
+	// 	return
+	// }
 	var deviceId = jsonMessageMap["deviceId"]
 	if deviceId == nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -78,7 +79,8 @@ func HandleAllNspiGenericJsonUpIngestion(c *gin.Context) {
 	sb.WriteString(deviceType)
 	// sb.WriteString(deviceType.(string))
 	sb.WriteString(`/`)
-	sb.WriteString(measurement.(string))
+	sb.WriteString(measurement)
+	// sb.WriteString(measurement.(string))
 	sb.WriteString(`/`)
 	sb.WriteString(deviceId.(string))
 	sb.WriteString(`/up/`)
