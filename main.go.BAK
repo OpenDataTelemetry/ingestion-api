@@ -1,0 +1,24 @@
+package main
+
+import (
+	"github.com/OpenDataTelemetry/ingestion-api/controller"
+	"github.com/OpenDataTelemetry/ingestion-api/mqtt"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	r := gin.Default() // Create a new gin router instance
+
+	r.Use(cors.Default())
+
+	api := r.Group("/api/ingestion/v0.1/IMT/LNS/")
+	{
+		api.POST("NSPI/all", controller.HandleAllNSPI)
+		// api.GET("SmartLight/all")
+	}
+
+	go mqtt.ConnectToBroker()
+	// go mqtt.PubToBroker()
+	r.Run(":8888")
+}

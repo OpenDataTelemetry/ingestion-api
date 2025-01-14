@@ -1,46 +1,46 @@
-# timeseries-api
+# ingestion-api
 
-## SmartLight
-Get all SmartLights by last 30 minutes:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/SmartLight/all?interval=30
+## LNS - LnsDownlink
+Post a Downlink Request to Specific LNS device:
 
-Get SmartLight by `deviceId`:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/SmartLight/deviceId/0004a30b00e94a9d?interval=30
+Using Curl:
+```bash
+curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/LnsDownlink/all -d '{"application": "DET", "etc": "imt", "reference": "test-node-red", "deviceId": "0004a30b00286d19", "confirmed": false, "fPort": 100, "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
+```
 
+Http Method: Post
+Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/LnsDownlink/all
+Data:
+```json
+{
+  "application": "DET", // Application Name registered in the corresponding NetworkServer
+  "etc": "imt", // NetworkServer to be queued
+  "reference": "test-node-red", 
+  "deviceId": "0004a30b00286d19", 
+  "confirmed": false,
+  "fPort": 100, // lora downlink fPort
+  "data": "AAE=", // downlink data
+  "timestamp": 1736459402000000000 // nanoseconds
+  }
+```
 
-## WaterTankLevel
-Get all WaterTankLevel measurements by last 30 minutes:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/WaterTankLevel/all?interval=30
+## NSPI - GenericJson
+Post a message to OpenDataTelemetry from Specific NSPI device:
 
-Get WaterTankLevel by `deviceId`:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/WaterTankLevel/deviceId/0004a30b00e93221?interval=30
+Using Curl:
+```bash
+curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/LnsDownlink/all -d '{"measurement": "Masak", "deviceId": "0004a30b00286d19", "etc": "imt", "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
+```
 
-
-## GaugePressure
-Get all GaugePressure measurements by last 30 minutes:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/GaugePressure/all?interval=30
-
-Get GaugePressure by `deviceId`:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/GaugePressure/deviceId/0004a30b00e9bed7?interval=30
-
-
-## Hydrometer
-Get all Hydrometer measurements by last 30 minutes:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/Hydrometer/all?interval=30
-
-Get Hydrometer by `deviceId`:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/Hydrometer/deviceId/0004a30b00e986c1?interval=30
-
-## EnergyMeter
-Get all EnergyMeter measurements by last 30 minutes:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/EnergyMeter/all?interval=30
-
-Get EnergyMeter by `deviceId`:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/EnergyMeter/deviceId/0004a30b00e96514?interval=30
-
-## WeatherStation
-Get all WeatherStation measurements by last 30 minutes:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/WeatherStation/all?interval=30
-
-Get WeatherStation by `deviceId`:
-https://smartcampus-k8s.maua.br/api/timeseries/v0.3/IMT/LNS/WeatherStation/deviceId/f803320100028a5f?interval=30
+Http Method: Post
+Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/NSPI/GenericJson/all
+Data:
+```json
+{
+  "measurement": "Masak", // mandatory
+  "deviceId": "0004a30b00286d19", // mandatory
+  "etc": "imt", // mandatory
+  "data": "AAE=", 
+  "timestamp": 1736459402000000000 // mandatory
+  }
+```
