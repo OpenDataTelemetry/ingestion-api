@@ -13,11 +13,13 @@ func main() {
 
 	api := r.Group("/api/ingestion/v0.1/IMT/")
 	{
-		api.POST("/NSPI/GenericJson/all", controller.HandleAllNspiGenericJsonUpIngestion)
 
-		api.POST("/LNS/LnsDownlink/all", controller.HandleAllLnsDownlinkIngestion)
+		api.POST("/LNS/Downlink/all", controller.HandleAllLnsDownlinkIngestion)
+		api.POST("/LNS/Alert/all", controller.HandleAllLnsAlertIngestion)
 
-		// api.POST("/LNS/Alert/all", controller.HandleAllLnsAlertIngestion)
+		api.POST("/NSPI/GenericJson/all", controller.HandleAllNspiGenericJsonIngestion)
+		api.POST("/NSPI/Alert/all", controller.HandleAllNspiAlertIngestion)
+
 	}
 
 	r.Run(":8888")
