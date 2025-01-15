@@ -1,6 +1,7 @@
 # ingestion-api
 
-## LNS - LnsDownlink
+## LNS
+### Downlink
 Post a Downlink Request to Specific LNS device:
 
 Using Curl:
@@ -9,7 +10,7 @@ curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/LnsDownl
 ```
 
 Http Method: Post
-Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/LnsDownlink/all
+Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Downlink/all
 Data:
 ```json
 {
@@ -24,7 +25,28 @@ Data:
   }
 ```
 
-## NSPI - GenericJson
+### Alert
+Post a Alert message to OpenDataTelemetry from Specific LNS device:
+
+Using Curl:
+```bash
+curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Alert/all -d '{"machine": "Masak", "deviceId": "0004a30b00286d19", "etc": "imt", "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
+```
+
+Http Method: Post
+Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Alert/all
+Data:
+```json
+{
+  "deviceId": "0004a30b00286d19", // mandatory
+  "etc": "imt", // mandatory
+  "data": "AAE=", 
+  "timestamp": 1736459402000000000 // mandatory
+  }
+```
+
+## NSPI
+### GenericJson
 Post a message to OpenDataTelemetry from Specific NSPI device:
 
 Using Curl:
@@ -34,6 +56,26 @@ curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/NSPI/Generic
 
 Http Method: Post
 Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/NSPI/GenericJson/all
+Data:
+```json
+{
+  "deviceId": "0004a30b00286d19", // mandatory
+  "etc": "imt", // mandatory
+  "data": "AAE=", 
+  "timestamp": 1736459402000000000 // mandatory
+  }
+```
+
+### Alert
+Post a Alert message to OpenDataTelemetry from Specific NSPI device:
+
+Using Curl:
+```bash
+curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/NSPI/Alert/all -d '{"machine": "Masak", "deviceId": "0004a30b00286d19", "etc": "imt", "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
+```
+
+Http Method: Post
+Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/NSPI/Alert/all
 Data:
 ```json
 {
