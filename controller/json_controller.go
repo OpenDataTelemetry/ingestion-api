@@ -24,7 +24,7 @@ func HandleAllLnsDownlinkIngestion(c *gin.Context) {
 		return
 	}
 
-	var measurement = "LnsDownlink"
+	var measurement = "Downlink"
 	var organization = "IMT"
 	var deviceType = "LNS"
 	var etc = jsonMessageMap["etc"]
@@ -126,7 +126,7 @@ func HandleAllLnsAlertIngestion(c *gin.Context) {
 
 	var organization = "IMT"
 	var deviceType = "LNS"
-	var measurement = "LnsAlert"
+	var measurement = "Alert"
 	var deviceId = jsonMessageMap["deviceId"]
 
 	if deviceId == nil {
@@ -188,7 +188,7 @@ func HandleAllNspiGenericJsonIngestion(c *gin.Context) {
 
 	var organization = "IMT"
 	var deviceType = "NSPI"
-	var measurement = "NspiGenericJson"
+	var measurement = "GenericJson"
 	var deviceId = jsonMessageMap["deviceId"]
 
 	if deviceId == nil {
@@ -248,7 +248,7 @@ func HandleAllNspiAlertIngestion(c *gin.Context) {
 
 	var organization = "IMT"
 	var deviceType = "NSPI"
-	var measurement = "NspiAlert"
+	var measurement = "Alert"
 	var deviceId = jsonMessageMap["deviceId"]
 
 	if deviceId == nil {
