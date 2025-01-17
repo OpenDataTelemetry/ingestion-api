@@ -1,16 +1,16 @@
 # ingestion-api
 
 ## LNS
-### Downlink
-Post a Downlink Request to Specific LNS device:
+### Command
+Post a Command Request to Specific LNS device:
 
 Using Curl:
 ```bash
-curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Downlink/all -d '{"application": "DET", "etc": "imt", "reference": "test-node-red", "deviceId": "0004a30b00286d19", "confirmed": false, "fPort": 100, "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
+curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Command/all -d '{"application": "DET", "etc": "imt", "reference": "test-node-red", "deviceId": "0004a30b00286d19", "confirmed": false, "fPort": 100, "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
 ```
 
 Http Method: Post
-Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Downlink/all
+Host: https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Command/all
 Data:
 ```json
 {
@@ -30,7 +30,7 @@ Post a Alert message to OpenDataTelemetry from Specific LNS device:
 
 Using Curl:
 ```bash
-curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Alert/all -d '{"machine": "Masak", "deviceId": "0004a30b00286d19", "etc": "imt", "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
+curl -X POST https://smartcampus-k8s.maua.br/api/ingestion/v0.1/IMT/LNS/Alert/all -d '{"deviceId": "0004a30b00286d19", "etc": "imt", "data": "AAE=", "timestamp": 1736459402000000000}' -H "Content-Type: application/json"
 ```
 
 Http Method: Post

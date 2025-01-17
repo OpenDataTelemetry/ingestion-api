@@ -127,8 +127,8 @@ func HandleAllLnsAlertIngestion(c *gin.Context) {
 	var organization = "IMT"
 	var deviceType = "LNS"
 	var measurement = "Alert"
-	var deviceId = jsonMessageMap["deviceId"]
 
+	var deviceId = jsonMessageMap["deviceId"]
 	if deviceId == nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "error",
@@ -141,6 +141,14 @@ func HandleAllLnsAlertIngestion(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "error",
 			"msg":    "Invalid input, please check your data. Missing 'etc' key in json.",
+		})
+		return
+	}
+	var data = jsonMessageMap["data"]
+	if data == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'data' key in json.",
 		})
 		return
 	}
@@ -206,6 +214,14 @@ func HandleAllNspiGenericJsonIngestion(c *gin.Context) {
 		})
 		return
 	}
+	var data = jsonMessageMap["data"]
+	if data == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'data' key in json.",
+		})
+		return
+	}
 	var timestamp = jsonMessageMap["timestamp"]
 	if timestamp == nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -263,6 +279,14 @@ func HandleAllNspiAlertIngestion(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "error",
 			"msg":    "Invalid input, please check your data. Missing 'etc' key in json.",
+		})
+		return
+	}
+	var data = jsonMessageMap["data"]
+	if data == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'data' key in json.",
 		})
 		return
 	}
