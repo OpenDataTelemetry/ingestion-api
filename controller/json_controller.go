@@ -24,7 +24,7 @@ func HandleAllLnsCommandIngestion(c *gin.Context) {
 		return
 	}
 
-	var measurement = "Downlink"
+	var measurement = "Command"
 	var organization = "IMT"
 	var deviceType = "LNS"
 	var etc = jsonMessageMap["etc"]
