@@ -11,14 +11,14 @@ func main() {
 
 	r.Use(cors.Default())
 
-	api := r.Group("/api/ingestion/v0.1/IMT/")
+	api := r.Group("/api/ingestion/v0.1/")
 	{
 
-		api.POST("/LNS/Downlink/all", controller.HandleAllLnsDownlinkIngestion)
-		api.POST("/LNS/Alert/all", controller.HandleAllLnsAlertIngestion)
+		api.POST("IMT/LNS/Command/all", controller.HandleAllLnsCommandIngestion)
+		api.POST("IMT/LNS/Alert/all", controller.HandleAllLnsAlertIngestion)
 
-		api.POST("/NSPI/GenericJson/all", controller.HandleAllNspiGenericJsonIngestion)
-		api.POST("/NSPI/Alert/all", controller.HandleAllNspiAlertIngestion)
+		api.POST("IMT/NSPI/GenericJson/all", controller.HandleAllNspiGenericJsonIngestion)
+		api.POST("IMT/NSPI/Alert/all", controller.HandleAllNspiAlertIngestion)
 
 	}
 

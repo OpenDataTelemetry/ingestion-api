@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HandleAllLnsDownlinkIngestion(c *gin.Context) {
+func HandleAllLnsCommandIngestion(c *gin.Context) {
 	var jsonMessageMap map[string]interface{}
 	if err := c.ShouldBindJSON(&jsonMessageMap); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
