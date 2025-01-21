@@ -308,7 +308,7 @@ func HandleAllNspiAlertIngestion(c *gin.Context) {
 	sb.WriteString(measurement)
 	sb.WriteString(`/`)
 	sb.WriteString(deviceId.(string))
-	sb.WriteString(`/up/`)
+	sb.WriteString(`/alert/`)
 	sb.WriteString(etc.(string))
 
 	go mqtt.PubToBroker(sb.String(), string(jsonMessage))
@@ -376,7 +376,7 @@ func HandleAllEvseAlertIngestion(c *gin.Context) {
 	sb.WriteString(measurement)
 	sb.WriteString(`/`)
 	sb.WriteString(deviceId.(string))
-	sb.WriteString(`/up/`)
+	sb.WriteString(`/alert/`)
 	sb.WriteString(etc.(string))
 
 	go mqtt.PubToBroker(sb.String(), string(jsonMessage))
