@@ -20,6 +20,8 @@ func main() {
 		api.POST("IMT/NSPI/GenericJson/all", controller.HandleAllNspiGenericJsonIngestion)
 		api.POST("IMT/NSPI/Alert/all", controller.HandleAllNspiAlertIngestion)
 
+		api.POST("IMT/EVSE/Alert/all", controller.HandleAllEvseAlertIngestion)
+
 	}
 
 	r.Run(":8888")

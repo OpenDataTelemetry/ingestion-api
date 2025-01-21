@@ -316,3 +316,71 @@ func HandleAllNspiAlertIngestion(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": "ok"})
 }
+
+func HandleAllEvseAlertIngestion(c *gin.Context) {
+	var jsonMessageMap map[string]interface{}
+	if err := c.ShouldBindJSON(&jsonMessageMap); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	jsonMessage, err := json.Marshal(jsonMessageMap)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	var organization = "IMT"
+	var deviceType = "EVSE"
+	var measurement = "Alert"
+	var deviceId = jsonMessageMap["deviceId"]
+
+	if deviceId == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'deviceId' key in json.",
+		})
+		return
+	}
+	var etc = jsonMessageMap["etc"]
+	if etc == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'etc' key in json.",
+		})
+		return
+	}
+	var data = jsonMessageMap["data"]
+	if data == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'data' key in json.",
+		})
+		return
+	}
+	var timestamp = jsonMessageMap["timestamp"]
+	if timestamp == nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "error",
+			"msg":    "Invalid input, please check your data. Missing 'timestamp' key in json.",
+		})
+		return
+	}
+
+	var sb strings.Builder
+	sb.WriteString(`OpenDataTelemetry/`)
+	sb.WriteString(organization)
+	sb.WriteString(`/`)
+	sb.WriteString(deviceType)
+	sb.WriteString(`/`)
+	sb.WriteString(measurement)
+	sb.WriteString(`/`)
+	sb.WriteString(deviceId.(string))
+	sb.WriteString(`/up/`)
+	sb.WriteString(etc.(string))
+
+	go mqtt.PubToBroker(sb.String(), string(jsonMessage))
+	fmt.Println("topic:", sb.String())
+
+	c.JSON(http.StatusOK, gin.H{"data": "ok"})
+}
